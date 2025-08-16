@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMSME - Global Investment Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+        .header .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FFD700;
+            display: block;
+        }
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        /* PDF Banner Embed */
+        .pdf-banner {
+            background: #f8f9fa;
+            padding: 3rem 0;
+            border-top: 4px solid #FF6B35;
+        }
+        .pdf-content {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .pdf-content h2 {
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .pdf-content .tagline {
+            color: #FF6B35;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        /* Main Content Section */
+        .main-content {
+            background: white;
+            padding: 5rem 0;
+        }
+        .three-column-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        .column {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+        }
+        .column:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .column h3 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .column i {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+        .sector-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .sector-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            color: #1e3c72;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .sector-item:hover {
+            transform: scale(1.05);
+            background: #FF6B35;
+            color: white;
+        }
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 5rem 0;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .contact-card h4 {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        /* CTA Section */
+        .cta-section {
+            background: #FF6B35;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .cta-btn {
+            background: white;
+            color: #FF6B35;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: #1e3c72;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .stats-banner {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .three-column-section {
+                grid-template-columns: 1fr;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px);}
+            to   { opacity: 1; transform: translateY(0);}
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1>Connect with India's 60+ Million MSMEs</h1>
+            <p class="subtitle">Gateway to India's Economic Engine - From Local Roots to Global Reach</p>
+            <div class="stats-banner">
+                <div class="stat-card animate-fade-in">
+                    <span class="stat-number">31%</span>
+                    <span class="stat-label">GDP Contribution</span>
+                </div>
+                <div class="stat-card animate-fade-in">
+                    <span class="stat-number">60M+</span>
+                    <span class="stat-label">Registered MSMEs</span>
+                </div>
+                <div class="stat-card animate-fade-in">
+                    <span class="stat-number">45%</span>
+                    <span class="stat-label">Export Share</span>
+                </div>
+                <div class="stat-card animate-fade-in">
+                    <span class="stat-number">260M+</span>
+                    <span class="stat-label">Employment</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- PDF Banner Section -->
+    <section class="pdf-banner">
+        <div class="container">
+            <div class="pdf-content">
+                <h2>MSME: A Catalyst for Global Growth</h2>
+                <p class="tagline">Empowering Indian MSMEs through global partnerships</p>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+                    Explore Opportunities of Investment & Trade with MSME
+                </p>
+                <div style="background: linear-gradient(135deg, #FF6B35, #F7931E); color: white; padding: 1rem 2rem; border-radius: 50px; display: inline-block;">
+                    <i class="fas fa-file-pdf" style="margin-right: 10px;"></i>
+                    Official Government Document - Ministry of MSME
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="three-column-section">
+                <!-- Investment & Trade Opportunities -->
+                <div class="column">
+                    <h3>
+                        <i class="fas fa-chart-line"></i>
+                        Investment & Trade Opportunities
+                    </h3>
+                    <p>Tap into India's manufacturing excellence with 35% of total manufacturing output from MSMEs.</p>
+                    <h4 style="color: #FF6B35; margin: 2rem 0 1rem 0;">Key Export Sectors:</h4>
+                    <div class="sector-list">
+                        <div class="sector-item">Pharmaceuticals</div>
+                        <div class="sector-item">Textiles</div>
+                        <div class="sector-item">Auto Components</div>
+                        <div class="sector-item">IT & ITeS</div>
+                        <div class="sector-item">Healthcare</div>
+                        <div class="sector-item">Leather</div>
+                    </div>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 107, 53, 0.1); border-radius: 10px;">
+                        <strong style="color: #FF6B35;">Export Growth:</strong><br>
+                        Second largest employer sector with consistent 45% export contribution
+                    </div>
+                </div>
+                <!-- Supply Chain Opportunities -->
+                <div class="column">
+                    <h3>
+                        <i class="fas fa-network-wired"></i>
+                        Supply Chain Opportunities
+                    </h3>
+                    <p>Access India's robust supply chain network and global integration capabilities.</p>
+                    <h4 style="color: #FF6B35; margin: 2rem 0 1rem 0;">High-Potential Sectors:</h4>
+                    <div class="sector-list">
+                        <div class="sector-item">Gems & Jewellery</div>
+                        <div class="sector-item">Engineering Goods</div>
+                        <div class="sector-item">Food Processing</div>
+                        <div class="sector-item">Nutraceuticals</div>
+                        <div class="sector-item">Telecommunication</div>
+                        <div class="sector-item">Tourism</div>
+                    </div>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 107, 53, 0.1); border-radius: 10px;">
+                        <strong style="color: #FF6B35;">Global Integration:</strong><br>
+                        Seamless supply chain partnerships with international quality standards
+                    </div>
+                </div>
+                <!-- Government Support -->
+                <div class="column">
+                    <h3>
+                        <i class="fas fa-handshake"></i>
+                        Government Support & FDI
+                    </h3>
+                    <p>Comprehensive government backing with 100% FDI allowed under automatic route.</p>
+                    <h4 style="color: #FF6B35; margin: 2rem 0 1rem 0;">Emerging Sectors:</h4>
+                    <div class="sector-list">
+                        <div class="sector-item">Fintech</div>
+                        <div class="sector-item">Digital Services</div>
+                        <div class="sector-item">Green Tech</div>
+                        <div class="sector-item">Clean Energy</div>
+                        <div class="sector-item">Biotechnology</div>
+                        <div class="sector-item">AgriTech</div>
+                    </div>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 107, 53, 0.1); border-radius: 10px;">
+                        <strong style="color: #FF6B35;">Policy Support:</strong><br>
+                        Favourable investment climate with comprehensive government incentives
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 3rem;">
+                Connect with MSME India
+            </h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4><i class="fas fa-building" style="margin-right: 10px;"></i>Ministry Headquarters</h4>
+                    <p>Kartavya Bhawan, Kartaya Path<br>New Delhi - 110011</p>
+                    <p><strong>Phone:</strong> 011-23063288</p>
+                    <p><strong>Udyam Registration:</strong> 011-23063800</p>
+                </div>
+                <div class="contact-card">
+                    <h4><i class="fas fa-globe" style="margin-right: 10px;"></i>International Cooperation</h4>
+                    <p>NSIC - International Division</p>
+                    <p><strong>Phone:</strong> 011-26926275</p>
+                    <p><strong>Email:</strong> icdivision@nsic.co.in</p>
+                    <p>Trade fairs, exhibitions & market intelligence</p>
+                </div>
+                <div class="contact-card">
+                    <h4><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>Regional Network</h4>
+                    <p>32 MSME Development & Facilitation Offices</p>
+                    <p>27 Branch MSME Development Offices</p>
+                    <p>Pan-India presence for localized support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 1rem; color: white;">
+                Start Your MSME Investment Journey
+            </h2>
+            <p style="font-size: 1.3rem; color: white; opacity: 0.9;">
+                Join the growth story of India's most dynamic business sector
+            </p>
+            <div class="cta-buttons">
+                <a href="#register" class="cta-btn">
+                    <i class="fas fa-rocket"></i>
+                    Register Interest
+                </a>
+                <a href="#guide" class="cta-btn">
+                    <i class="fas fa-download"></i>
+                    Download Investment Guide
+                </a>
+                <a href="#consult" class="cta-btn">
+                    <i class="fas fa-calendar-alt"></i>
+                    Schedule Consultation
+                </a>
+                <a href="#events" class="cta-btn">
+                    <i class="fas fa-users"></i>
+                    Join Trade Fair
+                </a>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+            // Observe all columns and cards
+            document.querySelectorAll('.column, .contact-card, .stat-card').forEach(el => {
+                observer.observe(el);
+            });
+            // Smooth scroll for CTA buttons
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
